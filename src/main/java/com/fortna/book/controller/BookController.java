@@ -8,6 +8,7 @@ import com.fortna.book.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.google.gson.*;
 
 @RestController
 public class BookController {
@@ -19,7 +20,8 @@ public class BookController {
 	public String getAllBooks() {
 		System.out.print("hyhy");
 		List<Book> listOfBooks = bookService.getAllBooks();
-		return listOfBooks.toString();
+		String json = new Gson().toJson(listOfBooks );
+		return json;
 	}
 
 }
