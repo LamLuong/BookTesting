@@ -29,9 +29,14 @@ public class BookDaoIplm implements BookDao {
 	}
 
 	public Book getBook(int id) {
-		Session session = this.sessionFactory.getCurrentSession();
-		Book book = (Book) session.get(Book.class, id);
-		return book;
+		Session session = this.sessionFactory.openSession();
+    String jpql = "FROM " + Book.class.getName() +" E WHERE E.id = " + String.valueOf(id);
+		List<Book> book = session.createQuery(jpql).list();
+    session.close();
+    if (book.size() < 1)
+      return null;
+
+		return book.get(0);
 	}
 
 	public Book addBook(Book book) {
