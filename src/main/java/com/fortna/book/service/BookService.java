@@ -27,8 +27,8 @@ public class BookService {
 	}
 
 	@Transactional
-	public void addBook(Book book) {
-		bookDao.addBook(book);
+	public Book addBook(Book book) {
+		return bookDao.addBook(book);
 	}
 
 	@Transactional

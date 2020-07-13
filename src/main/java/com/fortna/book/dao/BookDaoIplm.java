@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.fortna.book.HibernateUtils;
+import org.hibernate.Transaction;
 @Repository
 
 public class BookDaoIplm implements BookDao {
@@ -40,8 +41,9 @@ public class BookDaoIplm implements BookDao {
 	}
 
 	public Book addBook(Book book) {
-		Session session = this.sessionFactory.getCurrentSession();
+		Session session = this.sessionFactory.openSession();
 		session.save(book);
+    session.close();
 		return book;
 	}
 
